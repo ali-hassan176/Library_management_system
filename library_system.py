@@ -2,7 +2,7 @@ from hash import HashTable
 class LinkedlistNode:
     def __init__(self, value):
         self.data = value     # stores the value of the node
-        self.next = None      # pointer to the next node (initially None)
+        self.next = None      # pointer to the next node
 
 class slist:
     def __init__(self):
@@ -56,7 +56,16 @@ class AuthorIndex:
     def get_books(self, author):
         author = self.normalize(author)
         return self.table.search(author)  # returns slist
+class Membernode():
+    def __init__(self,member_id,name):
+        self.memberid=member_id
+        self.name = name
+        self.borrowed_books = []
+    def can_borrow(self):
+        return len(self.borrowed_books)<5
 class Member():
     def __init__(self):
         self.table = HashTable()
+    def insertion(self):
+        pass
     
