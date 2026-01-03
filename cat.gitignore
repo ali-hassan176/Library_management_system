@@ -1,0 +1,37 @@
+cat > .gitignore << 'EOF'
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+venv/
+env/
+.env
+.venv/
+
+# Virtual environments
+venv*/
+ENV*/
+env*/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs and temp files
+*.log
+*.tmp
+*.temp
+
+# Data files (if they're large)
+*.csv
+*.json
+data/    # Comment this out if you want to track data
+EOF
