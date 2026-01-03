@@ -1,4 +1,5 @@
 from hash import HashTable
+from avl import AVLTree
 class LinkedlistNode:
     def __init__(self, value):
         self.data = value     # stores the value of the node
@@ -56,16 +57,72 @@ class AuthorIndex:
     def get_books(self, author):
         author = self.normalize(author)
         return self.table.search(author)  # returns slist
-class Membernode():
-    def __init__(self,member_id,name):
-        self.memberid=member_id
+    def get_books_list(self, author):
+        s_list = self.get_books(author)
+        return s_list.to_list() if s_list else []
+
+class MemberNode:
+    def __init__(self, member_id, name):
+        self.member_id = member_id
         self.name = name
-        self.borrowed_books = []
+        self.borrowed_books = []  # list of ISBNs
+
     def can_borrow(self):
-        return len(self.borrowed_books)<5
-class Member():
+        return len(self.borrowed_books) < 5
+
+class MemberDatabase:
     def __init__(self):
         self.table = HashTable()
-    def insertion(self):
-        pass
-    
+
+    def add_member(self, member_id, name):
+        if self.table.search(member_id) is not None:
+            return False  # already exists
+
+        member = MemberNode(member_id, name)
+        self.table.insert(member_id, member)
+        return True
+
+    def get_member(self, member_id):
+        return self.table.search(member_id)
+
+    def borrow_book(self, member_id, isbn):
+        member = self.get_member(member_id)
+
+        if member is None:
+            return False
+
+        if not member.can_borrow():
+            return False
+
+        member.borrowed_books.append(isbn)
+        return True
+
+    def return_book(self, member_id, isbn):
+        member = self.get_member(member_id)
+
+        if member is None or isbn not in member.borrowed_books:
+            return False
+
+        member.borrowed_books.remove(isbn)
+        return True
+
+class TitleIndex:
+    def __init__(self):
+        self.table = HashTable()
+
+    def normalize(self, title):
+        return " ".join(title.lower().split())
+
+    def add_book(self, title, isbn):
+        title = self.normalize(title)
+        self.table.insert(title, isbn)
+
+    def remove_book(self, title):
+        title = self.normalize(title)
+        self.table.delete(title)
+
+    def get_isbn(self, title):
+        title = self.normalize(title)
+        return self.table.search(title)
+    def exists(self, title):
+        return self.get_isbn(title) is not None
