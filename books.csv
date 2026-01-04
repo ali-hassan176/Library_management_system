@@ -1,7 +1,63 @@
 ISBN,Title,Author,Year,Category,TotalCopies
-9780134524521,Peer-e-Kamil,Umerah Ahmad,2004,Novel,5
-9734342510985,Jannat ke pattay,Nimrah Ahmad,2013,Novel,3
-5480294580924,Bakht,Mehrunnisa Shahmeer,2016,Novel,4
-9780134685991,Effective Python,Brett Slatkin,2019,Programming,3
+5480294580924,Bakht,Mehrunisa Shahmeer,2016,Novel,3
+9734342510985,Haalim,Nimra Ahmed,2017,Novel,3
+9780131103627,The C Programming Language,Dennis Ritchie,1978,Programming,5
 9780132350884,Clean Code,Robert Martin,2008,Programming,5
+9780132974285,Digital Design,M. Morris Mano,2012,Engineering,4
+9780133406958,Database System Concepts,Abraham Silberschatz,2010,Engineering,5
+9780134093413,Computer Organization and Design,David A. Patterson,2013,Engineering,3
+9780134524521,Peer-e-Kamil,Umera Ahmed,2004,Novel,5
+9780134685991,Effective Python,Brett Slatkin,2019,Programming,3
+9780136779034,Signals and Systems,Alan V. Oppenheim,2010,Engineering,3
+9780198701607,Quantum Mechanics,David J. Griffiths,2018,Science,3
+9780198753435,A Brief History of Time,Stephen Hawking,1988,Science,4
+9780198785780,Organic Chemistry,L.G. Wade Jr.,2016,Science,3
+9780199231500,Analytical Chemistry,Gary D. Christian,2014,Science,3
+9780199231517,Principles of Electronics,V.K. Mehta,2012,Engineering,4
+9780199231524,Discrete Mathematics,K.H. Rosen,2012,Engineering,3
+9780199231531,Linear Algebra and Its Applications,Gilbert Strang,2015,Science,4
+9780199231548,Artificial Intelligence: A Modern Approach,Stuart Russell,2010,Engineering,5
+9780199231555,Computer Networks,Andrew S. Tanenbaum,2011,Engineering,4
+9780199231562,Operating System Concepts,Abraham Silberschatz,2012,Engineering,5
+9780199231579,Python Crash Course,Eric Matthes,2016,Programming,4
+9780199231586,The Pragmatic Programmer,Andrew Hunt,1999,Programming,3
+9780199231593,Engineering Mechanics,Andrew Pytel,2013,Engineering,4
+9780199231609,Engineering Thermodynamics,Michael J. Moran,2014,Engineering,3
+9780199231616,Fundamentals of Physics,David Halliday,2010,Science,5
+9780199231623,Modern Physics,R.A. Serway,2011,Science,4
+9780199231630,Sulphite,Noor Rajput,2021,Novel,3
+9780199231647,Mushaf,Nimra Ahmed,2011,Novel,4
+9780199231654,Jannat Kay Pattay,Nimra Ahmed,2013,Novel,3
+9780199231661,Mala,Nimra Ahmed,2022,Novel,3
+9780199231678,La Hasil,Umera Ahmed,2012,Novel,3
+9780199231685,Bismil,Sadia Rajpoot,2019,Novel,3
+9780199231692,Yaram,Sumaira Hameed,2019,Novel,3
+9780199231708,Usri Yusra,Husna Hussain,2024,Novel,3
+9780199231715,Ishq-e-Atish,Sadia Rajpoot,2023,Novel,3
+9780199231722,Alif,Umera Ahmed,2013,Novel,3
+9780199231739,Namal,Nimra Ahmed,2014,Novel,4
+9780199231746,Introduction to Python,Mark Lutz,2013,Programming,4
+9780199231753,Data Science Handbook,Field Cady,2015,Science,3
+9780199231760,Machine Learning,Tom M. Mitchell,1997,Engineering,4
+9780199231777,Database Management Systems,Raghu Ramakrishnan,2003,Engineering,5
+9780199231784,Theoretical Physics,Geoffrey Landis,2016,Science,3
+9780199231791,Engineering Mathematics,K.A. Stroud,2010,Engineering,4
+9780199231807,Programming in C,Brian W. Kernighan,1988,Programming,4
+9780199231814,Data Structures in C,Adam Drozdek,2012,Programming,3
+9780199231821,Python Cookbook,David Beazley,2013,Programming,4
+9780199231838,Deep Learning,Ian Goodfellow,2016,Science,3
+9780199231845,Robotics: Control Sensing Vision,K.S. Fu,2015,Engineering,3
+9780199231852,Computer Architecture,John L. Hennessy,2012,Engineering,4
+9780199231869,Signals and Systems 2,Simon Haykin,2011,Engineering,3
+9780199231876,Modern Biology,Campbell,2010,Science,4
+9780199231883,Chemistry: The Central Science,Brown,2013,Science,3
+9780199231890,Physics for Scientists,Halliday,2010,Science,4
+9780199231906,Applied Thermodynamics,Cengel,2012,Engineering,3
+9780199239999,White Nights,Fyodor Dostoevsky,1848,Novel,4
+9780262033848,Introduction to Algorithms,Thomas H. Cormen,2009,Engineering,4
+9780321751041,Modern Control Systems,Richard C. Dorf,2011,Engineering,4
+9780321751042,Introduction to Electrical Engineering,Allan R. Hambley,2011,Engineering,4
+9780521876228,Classical Mechanics,Herbert Goldstein,2015,Science,2
+9781118130658,Data Structures and Algorithms in Python,Michael T. Goodrich,2013,Programming,3
+9781449373320,Python for Data Analysis,Wes McKinney,2017,Programming,3
 9781492055020,Fluent Python,Luciano Ramalho,2022,Programming,4

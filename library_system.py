@@ -57,7 +57,7 @@ class LibrarySystem:
     # --------------------
     # Save books to CSV
     # --------------------
-    def save_books(self, filepath):
+    def save_books(self, filepath="books.csv"):
         books = self.books.inorder()
         with open(filepath, 'w', newline='', encoding='utf-8') as file:
             writer = csv.writer(file)
