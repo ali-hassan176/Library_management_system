@@ -1,0 +1,120 @@
+from avl import AVLTree
+from hashes import TitleIndex, AuthorIndex, MemberDatabase
+import csv
+
+class LibrarySystem:
+    def __init__(self):
+        self.books = AVLTree()
+        self.title_index = TitleIndex()
+        self.author_index = AuthorIndex()
+        self.members = MemberDatabase()
+
+    # --------------------
+    # Book Operations
+    # --------------------
+    def add_book(self, ISBN, title, author, year, category, copies):
+        if self.books.search(ISBN):
+            return False
+
+        book_data = {
+            'title': title,
+            'author': author,
+            'year': year,
+            'category': category,
+            'available_copies': copies
+        }
+
+        self.books.insert(ISBN, book_data)
+        self.title_index.add_book(title, ISBN)
+        self.author_index.add_book(author, ISBN)
+
+        self.save_books("books.csv")
+        return True
+    def save_books(self, filepath):
+        books = self.books.inorder()
+
+        with open(filepath, 'w', newline='', encoding='utf-8') as file:
+            writer = csv.writer(file)
+            writer.writerow([
+                "ISBN", "Title", "Author", "Year", "Category", "TotalCopies"
+            ])
+
+            for isbn, data in books:
+                writer.writerow([
+                    isbn,
+                    data['title'],
+                    data['author'],
+                    data['year'],
+                    data['category'],
+                    data['available_copies']
+                ])
+
+
+    def search_by_isbn(self, ISBN):
+        node = self.books.search(ISBN)
+        return node.value if node else None
+
+    def search_by_title(self, title):
+        isbn = self.title_index.get_isbn(title)
+        if not isbn:
+            return None
+        node = self.books.search(isbn)
+        return node.value if node else None
+
+    def search_by_author(self, author):
+        isbns = self.author_index.get_books_list(author)
+        return [self.books.search(isbn).value for isbn in isbns if self.books.search(isbn)]
+
+    # --------------------
+    # Member Operations
+    # --------------------
+    def add_member(self, member_id, name):
+        return self.members.add_member(member_id, name)
+
+    # --------------------
+    # Borrow / Return
+    # --------------------
+    def borrow_book(self, member_id, ISBN):
+        book_node = self.books.search(ISBN)
+        if not book_node or book_node.value['available_copies'] <= 0:
+            return False
+
+        if not self.members.borrow_book(member_id, ISBN):
+            return False
+
+        book_node.value['available_copies'] -= 1
+        return True
+
+    def return_book(self, member_id, ISBN):
+        book_node = self.books.search(ISBN)
+        if not book_node:
+            return False
+
+        if not self.members.return_book(member_id, ISBN):
+            return False
+
+        book_node.value['available_copies'] += 1
+        return True
+
+    # --------------------
+    # Reports
+    # --------------------
+    def list_all_books(self):
+        return self.books.inorder()
+
+    # --------------------
+    # CSV LOADER
+    # --------------------
+    def load_books_from_csv(self, filepath):
+        with open(filepath, newline='', encoding='utf-8') as file:
+            reader = csv.DictReader(file)
+
+            for row in reader:
+                self.add_book(
+                    row['ISBN'],
+                    row['Title'],
+                    row['Author'],
+                    int(row['Year']),
+                    row['Category'],
+                    int(row['TotalCopies'])
+                )
