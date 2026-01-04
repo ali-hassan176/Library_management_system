@@ -8,7 +8,29 @@ class LibrarySystem:
         self.title_index = TitleIndex()
         self.author_index = AuthorIndex()
         self.members = MemberDatabase()
+    def load_members_from_csv(self, filepath="members.csv"):
+        try:
+            with open(filepath, newline='', encoding='utf-8') as file:
+                reader = csv.DictReader(file)
+                for row in reader:
+                    self.members.add_member(row["MemberID"], row["Name"])
+                    member = self.members.get_member(row["MemberID"])
+                    if row["BorrowedBooks"]:
+                        member.borrowed_books = row["BorrowedBooks"].split(";")
+        except FileNotFoundError:
+            # No members.csv yet, that's fine
+            pass
 
+    # --------------------
+    # Save members to CSV
+    # --------------------
+    def save_members(self, filepath="members.csv"):
+        with open(filepath, 'w', newline='', encoding='utf-8') as file:
+            writer = csv.writer(file)
+            writer.writerow(["MemberID", "Name", "BorrowedBooks"])
+            for member_id, member in self.members.table_items():
+                borrowed = ";".join(member.borrowed_books)
+                writer.writerow([member_id, member.name, borrowed])
     # --------------------
     # Add a book
     # --------------------

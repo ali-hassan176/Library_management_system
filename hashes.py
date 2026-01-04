@@ -105,6 +105,13 @@ class MemberDatabase:
 
         member.borrowed_books.remove(isbn)
         return True
+    def table_items(self):
+        """Yield (member_id, MemberNode) for all members."""
+        for bucket in self.table.table:
+            current = bucket
+            while current:
+                yield current.key, current.value
+                current = current.next
 
 class TitleIndex:
     def __init__(self):

@@ -11,7 +11,7 @@ class Booknode:
             'title': title,
             'author': author,
             'year': year,
-            'category': category,       # ✅ fixed typo
+            'category': category,       
             'available_copies': copies
         }
         self.left = None
