@@ -10,9 +10,9 @@ class LibrarySystem:
         self.members = MemberDatabase()
 
     # --------------------
-    # Book Operations
+    # Add a book
     # --------------------
-    def add_book(self, ISBN, title, author, year, category, copies):
+    def add_book(self, ISBN, title, author, year, category, copies, save=True):
         if self.books.search(ISBN):
             return False
 
@@ -28,28 +28,48 @@ class LibrarySystem:
         self.title_index.add_book(title, ISBN)
         self.author_index.add_book(author, ISBN)
 
-        self.save_books("books.csv")
+        if save:
+            self.save_books("books.csv")
         return True
+
+    # --------------------
+    # Save books to CSV
+    # --------------------
     def save_books(self, filepath):
         books = self.books.inorder()
-
         with open(filepath, 'w', newline='', encoding='utf-8') as file:
             writer = csv.writer(file)
-            writer.writerow([
-                "ISBN", "Title", "Author", "Year", "Category", "TotalCopies"
-            ])
-
+            writer.writerow(["ISBN", "Title", "Author", "Year", "Category", "TotalCopies"])
             for isbn, data in books:
                 writer.writerow([
                     isbn,
-                    data['title'],
-                    data['author'],
-                    data['year'],
-                    data['category'],
-                    data['available_copies']
+                    data.get('title', ''),
+                    data.get('author', ''),
+                    data.get('year', ''),
+                    data.get('category', ''),
+                    data.get('available_copies', '')
                 ])
 
+    # --------------------
+    # Load books from CSV
+    # --------------------
+    def load_books_from_csv(self, filepath):
+        with open(filepath, newline='', encoding='utf-8') as file:
+            reader = csv.DictReader(file)
+            for row in reader:
+                self.add_book(
+                    row['ISBN'],
+                    row['Title'],
+                    row['Author'],
+                    int(row['Year']),
+                    row['Category'],
+                    int(row['TotalCopies']),
+                    save=False  # avoid overwriting CSV
+                )
 
+    # --------------------
+    # Search operations
+    # --------------------
     def search_by_isbn(self, ISBN):
         node = self.books.search(ISBN)
         return node.value if node else None
@@ -66,7 +86,7 @@ class LibrarySystem:
         return [self.books.search(isbn).value for isbn in isbns if self.books.search(isbn)]
 
     # --------------------
-    # Member Operations
+    # Members
     # --------------------
     def add_member(self, member_id, name):
         return self.members.add_member(member_id, name)
@@ -78,10 +98,8 @@ class LibrarySystem:
         book_node = self.books.search(ISBN)
         if not book_node or book_node.value['available_copies'] <= 0:
             return False
-
         if not self.members.borrow_book(member_id, ISBN):
             return False
-
         book_node.value['available_copies'] -= 1
         return True
 
@@ -89,32 +107,13 @@ class LibrarySystem:
         book_node = self.books.search(ISBN)
         if not book_node:
             return False
-
         if not self.members.return_book(member_id, ISBN):
             return False
-
         book_node.value['available_copies'] += 1
         return True
 
     # --------------------
-    # Reports
+    # List all books
     # --------------------
     def list_all_books(self):
         return self.books.inorder()
-
-    # --------------------
-    # CSV LOADER
-    # --------------------
-    def load_books_from_csv(self, filepath):
-        with open(filepath, newline='', encoding='utf-8') as file:
-            reader = csv.DictReader(file)
-
-            for row in reader:
-                self.add_book(
-                    row['ISBN'],
-                    row['Title'],
-                    row['Author'],
-                    int(row['Year']),
-                    row['Category'],
-                    int(row['TotalCopies'])
-                )
